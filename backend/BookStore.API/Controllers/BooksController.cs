@@ -15,15 +15,20 @@ public class BooksController : ControllerBase
     {
         _context = context;
     }
-
-    // GET /api/books?pageNum=1&pageSize=5&sortOrder=asc
+    
+    // GET /api/books?pageNum=1&pageSize=5&sortOrder=asc&categories=Biography&categories=Classic
     [HttpGet]
     public async Task<IActionResult> GetBooks(
         int pageNum = 1,
         int pageSize = 5,
-        string sortOrder = "asc")
+        string sortOrder = "asc",
+        [FromQuery] List<string>? categories = null)
     {
         var query = _context.Books.AsQueryable();
+
+        // filter by category if any are selected
+        if (categories != null && categories.Any())
+            query = query.Where(b => categories.Contains(b.Category));
 
         // sort ascending or descending by title
         query = sortOrder == "desc"
@@ -38,7 +43,22 @@ public class BooksController : ControllerBase
             .Take(pageSize)
             .ToListAsync();
 
-        // return both the books and the total so the frontend can calculate pages
         return Ok(new { books, totalCount });
     }
+    
+    
+    // GET /api/books/categories
+    [HttpGet("categories")]
+    public async Task<IActionResult> GetCategories()
+    {
+        var categories = await _context.Books
+            .Select(b => b.Category)
+            .Distinct()
+            .OrderBy(c => c)
+            .ToListAsync();
+
+        return Ok(categories);
+    }
+
+
 }
