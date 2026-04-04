@@ -2,10 +2,10 @@ import { useEffect, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import type { CartItem } from '../App';
 
-type Book = {
+export type Book = {
   bookId: number;
   title: string;
-  author: string;
+  author: string; 
   publisher: string;
   isbn: string;
   classification: string;
@@ -140,13 +140,20 @@ function BookList({ cart, addToCart }: Props) {
           <div className="d-flex justify-content-between align-items-center mb-4">
             <h2>Bookstore</h2>
 
-            {/* cart summary button with Bootstrap Badge showing item count */}
-            <button className="btn btn-outline-dark position-relative" onClick={goToCart}>
-              Cart
-              <span className="badge bg-primary rounded-pill ms-2">
-                {totalCartItems}
-              </span>
-            </button>
+            <div className="d-flex gap-2">
+              {/* cart summary button with Bootstrap Badge showing item count */}
+              <button className="btn btn-outline-dark position-relative" onClick={goToCart}>
+                Cart
+                <span className="badge bg-primary rounded-pill ms-2">
+                  {totalCartItems}
+                </span>
+              </button>
+
+              {/* admin page link */}
+              <button className="btn btn-outline-secondary" onClick={() => navigate('/adminbooks')}>
+                Admin
+              </button>
+            </div>
           </div>
 
           {/* page size and sort controls */}
@@ -241,3 +248,4 @@ function BookList({ cart, addToCart }: Props) {
 }
 
 export default BookList;
+

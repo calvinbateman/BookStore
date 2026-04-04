@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import BookList from './components/BookList';
 import Cart from './components/Cart';
+import AdminBooks from './components/AdminBook'
 
 // shape of a single cart item — exported so BookList and Cart can use it
 export type CartItem = {
@@ -41,6 +42,7 @@ function App() {
       <Routes>
         <Route path="/" element={<BookList cart={cart} addToCart={addToCart} />} />
         <Route path="/cart" element={<Cart cart={cart} setCart={setCart} />} />
+        <Route path="/adminbooks" element={<AdminBooks/>} />
       </Routes>
     </BrowserRouter>
   );
