@@ -30,7 +30,7 @@ function AdminBooks() {
       pageSize: String(pageSize),
       sortOrder,
     });
-    fetch(`http://localhost:5134/api/books?${params}`)
+    fetch(`https://please-work-this-time-e8ebejc7a7a9cgbt.centralus-01.azurewebsites.net/api/books?${params}`)
       .then(res => res.json())
       .then(data => {
         setBooks(data.books);
@@ -44,7 +44,7 @@ function AdminBooks() {
   };
 
   const handleDelete = (bookId : number) => {
-        fetch(`http://localhost:5134/api/books/${bookId}` , {
+        fetch(`https://please-work-this-time-e8ebejc7a7a9cgbt.centralus-01.azurewebsites.net/api/books/${bookId}` , {
                 method: 'DELETE',
             }).then(() => {
                 setBooks(prev => prev.filter(b => b.bookId !== bookId));
@@ -58,18 +58,18 @@ function AdminBooks() {
           sortOrder,
         });
         if (selectedBook !== null) {
-            fetch(`http://localhost:5134/api/books/${selectedBook.bookId}`, {
+            fetch(`https://please-work-this-time-e8ebejc7a7a9cgbt.centralus-01.azurewebsites.net/api/books/${selectedBook.bookId}`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(formData),
             }).then(() => {
-            fetch(`http://localhost:5134/api/books?${params}`)
+            fetch(`https://please-work-this-time-e8ebejc7a7a9cgbt.centralus-01.azurewebsites.net/api/books?${params}`)
                 .then(res => res.json())
                 .then(data => { setBooks(data.books); setTotalCount(data.totalCount); });
             setSelectedBook(null);
             });
         } else {
-            fetch('http://localhost:5134/api/books', {
+            fetch('https://please-work-this-time-e8ebejc7a7a9cgbt.centralus-01.azurewebsites.net/api/books', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(formData),

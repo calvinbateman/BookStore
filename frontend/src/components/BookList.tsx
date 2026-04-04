@@ -51,7 +51,7 @@ function BookList({ cart, addToCart }: Props) {
 
   // fetch the list of categories once on mount for the filter sidebar
   useEffect(() => {
-    fetch('http://localhost:5134/api/books/categories')
+    fetch('https://please-work-this-time-e8ebejc7a7a9cgbt.centralus-01.azurewebsites.net/api/books/categories')
       .then(res => res.json())
       .then(data => setCategories(data));
   }, []);
@@ -65,7 +65,7 @@ function BookList({ cart, addToCart }: Props) {
     });
     selectedCategories.forEach(c => params.append('categories', c));
 
-    fetch(`http://localhost:5134/api/books?${params}`)
+    fetch(`https://please-work-this-time-e8ebejc7a7a9cgbt.centralus-01.azurewebsites.net/api/books?${params}`)
       .then(res => res.json())
       .then(data => {
         setBooks(data.books);
