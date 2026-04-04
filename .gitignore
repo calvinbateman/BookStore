@@ -31,3 +31,5 @@ obj/
 # Visual Studio user files
 *.user
 .vs/
+
+backend/BookStore.API/publish/
