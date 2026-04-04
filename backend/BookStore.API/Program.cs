@@ -15,7 +15,8 @@ builder.Services.AddCors(options =>
     options.AddPolicy("AllowFrontend", policy =>
         policy.WithOrigins(
             "http://localhost:5173",   // local Vite dev server
-            "https://localhost:5173"   // Azure Static Web Apps URL goes here once deployed
+            "https://localhost:5173",
+            "https://green-bay-0fe3fb310.6.azurestaticapps.net"  // Azure Static Web Apps
         )
         .AllowAnyMethod()
         .AllowAnyHeader()));
